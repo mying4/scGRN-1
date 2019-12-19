@@ -72,7 +72,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
   df <- df[, c('gene','enhancer','promoter','enhancer_TF','promoter_TF','TFs')]
   df <- df[!is.na(df$TFs),]
   df$id <- seq.int(nrow(df))
-  df_TF <- df[,c('TFs','id')][,.(TF = unlist(TFs)), by = id]
+  df_TF <- df[,c('TFs','id')][,list(TF = unlist(TFs)), by = id]
   df <- dplyr::left_join(df,df_TF,by = 'id')
 
   df$id <- NULL

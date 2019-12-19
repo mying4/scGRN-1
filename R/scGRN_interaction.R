@@ -65,8 +65,8 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
   hg19_refseq_promoters <- GenomicFeatures::promoters(hg19.transcripts,upstream = up_stream,
                                      downstream = down_stream)
 
-  seqnames_record <- GenomicRanges::seqnames(hg19_refseq_promoters)
-  hg19_refseq_promoters <- unlist(hg19_refseq_promoters[IRanges::`%in%`(seqnames_record,
+  seqnames_record <- GenomeInfoDb::seqnames(hg19_refseq_promoters)
+  hg19_refseq_promoters <- unlist(hg19_refseq_promoters[S4Vectors::`%in%`(seqnames_record,
                                                         c('chrX','chrY',paste('chr',1:22,sep='')))])
   hg19_refseq_promoters <- unique(hg19_refseq_promoters)
   gene_names <- biomaRt::getBM(attributes = c("hgnc_symbol",'entrezgene_id','ensembl_gene_id'),
@@ -145,12 +145,14 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
 
   df <- data.table::rbindlist(list(df1,df2))
   df$id <- seq.int(nrow(df))
-  df_enhancers <- df[,c('enhs','id')][, .(enhancer = unlist(enhs)),by = id]
+  df_enhancers <- df[,c('enhs','id')]
+  df_enhancers <- df_enhancers[, list(enhancer = unlist(enhs)),by = id]
 
   df <- dplyr::left_join(df,df_enhancers,by = 'id')[,c('promoters','promoter_chr','enhancer','enh_chr')]
   df <- data.table::data.table(df)
   df$id <- seq.int(nrow(df))
-  df_promoters <- df[,c('promoters','id')][, .(promoter = unlist(promoters)),by = id]
+  df_promoters <- df[,c('promoters','id')]
+  df_promoters<- df_promoters[, list(promoter = unlist(promoters)),by = id]
   df <- dplyr::left_join(df,df_promoters,by = 'id')[,c('promoter','promoter_chr','enhancer','enh_chr')]
   df <- dplyr::distinct(df)
   sp_list  <- data.table::tstrsplit(df$enhancer,"_|:|-", keep = c(2,3,4))
