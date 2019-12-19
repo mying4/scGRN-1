@@ -31,7 +31,7 @@
 #' @import biomaRt
 #' @import  GenomicRanges
 #' @import  GenomicFeatures
-#' @importFrom  IRanges IRanges findOverlapPairs
+#' @import  IRanges
 #' @importFrom  GenomicInteractions GenomicInteractions  annotateInteractions anchorOne anchorTwo
 #' @importFrom data.table data.table  rbindlist tstrsplit
 #' @importFrom  dplyr left_join full_join distinct
