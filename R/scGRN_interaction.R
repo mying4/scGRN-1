@@ -178,7 +178,7 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
                          'promoter_start',
                          'promoter_end','enh_chr',
                          'enh_start','enh_end')]
-  names(final_df) <- c('gene','gene_chr',
+  colnames(final_df) <- c('gene','gene_chr',
                       'promoter_start',
                       'promoter_end','enh_chr',
                       'enh_start','enh_end')
