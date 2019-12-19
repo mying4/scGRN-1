@@ -19,8 +19,8 @@ The data frame should contain gene, gene_chr, promoter_start, promoter_end,}
 
 \item{num_cores}{number of cores used to do parallel computing, speeding up the match process.}
 
-\item{pwm_tpye}{the type of PWM generated, should be one of "log2probratio" or "prob". 
-"log2probratio" will generate the PWM matrix in log-scale, while "prob" will give the PWM matrix in probability scale of 0 to 1. 
+\item{pwm_tpye}{the type of PWM generated, should be one of "log2probratio" or "prob".
+"log2probratio" will generate the PWM matrix in log-scale, while "prob" will give the PWM matrix in probability scale of 0 to 1.
 Inherited from toPWM function.}
 }
 \value{

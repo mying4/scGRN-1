@@ -11,20 +11,20 @@ host='uswest.ensembl.org'))
 }
 \arguments{
 \item{hic_interaction}{a data frame containing the variables : chr1,start1,end1,chr2,start2,end2
-or chr,start1,end1,start2,end2. 
+or chr,start1,end1,start2,end2.
 chr1,ch2 or chr should have the following format 'chrD'(D represents digit 1-22 or X Y)
 start1,end1,start2,end2 should be integer type.}
 
 \item{enhancers}{a data frame containing chr,start,end for enhancers.}
 
 \item{ref_promoters}{an optional data frame containing chr,start,end for promoters. If it is not supplied,
-promoters are from package - TxDb.Hsapiens.UCSC.hg19.knownGene. If it is supplied, ref_promoters are used and 
+promoters are from package - TxDb.Hsapiens.UCSC.hg19.knownGene. If it is supplied, ref_promoters are used and
 linked to target genes by package - TxDb.Hsapiens.UCSC.hg19.knownGene.}
 
-\item{up_stream, down_stream}{The up_stream and down_stream arguments define the number of nucleotides in the 5' and 3' direction, 
+\item{up_stream, down_stream}{The up_stream and down_stream arguments define the number of nucleotides in the 5' and 3' direction,
 respectively. Used for annatating promoters.}
 
-\item{link_type}{"any", "start", "end" or "within" are used when ref_promoters is provided. Inherited from 
+\item{link_type}{"any", "start", "end" or "within" are used when ref_promoters is provided. Inherited from
 function GenomicRanges:findOverlapPairs.}
 
 \item{target_genes}{a vector of target genes which should be consistent with the gene_id_option.}
