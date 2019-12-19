@@ -47,13 +47,6 @@ a data frame containing TG, TF, promoter, enhancer and coef.
 \description{
 Get gene regulatory network
 }
-\examples{
-
-data(sample_TFs)
-data(sample_gexpr)
-Nt <- scGRN_getNt(sample_TFs,sample_gexpr)
-
-}
 \seealso{
 glmnet
 }

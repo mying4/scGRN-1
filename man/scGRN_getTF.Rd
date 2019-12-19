@@ -29,12 +29,6 @@ enhancer_TF is list.
 \description{
 Find transcription factors which bind to promoters and enhancers
 }
-\examples{
-
-data(sample_interaction)
-TFs <- scGRN_getTF(sample_interaction)
-
-}
 \seealso{
 JASPAR2018, TFBSTools
 }
