@@ -32,8 +32,8 @@
 #' @import  GenomicRanges
 #' @import  GenomicFeatures
 #' @import GenomicInteractions
-#' @importFrom data.table data.table  rbindlist tstrsplit
-#' @importFrom  dplyr left_join full_join distinct
+#' @import data.table
+#' @import  dplyr
 
 
 scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',up_stream = 2500,
