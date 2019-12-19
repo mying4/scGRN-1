@@ -32,11 +32,11 @@
 #' @importFrom  GenomicInteractions GenomicInteractions annotateInteractions isInteractionType
 #' @importFrom  GenomicFeatures genes transcriptsBy promoters
 #' @importFrom  IRanges IRanges
-#' @import  S4Vectors
+#' @importFrom  S4Vectors `%in%` mcols
 #' @importFrom GenomeInfoDb seqnames
 #' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
 #' @import   data.table
-#' @importFrom  dplyr  left_join full_join distinct
+#' @import  dplyr
 
 scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',up_stream = 2500,
                                down_stream = 2500, link_type = 'within' ,target_genes='all',
