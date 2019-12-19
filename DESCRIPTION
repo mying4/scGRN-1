@@ -2,7 +2,7 @@ Package: scGRN
 Title: Gene Regulatory Network
 Version: 1.0
 Authors@R: 
-    person(given = "daifengwanglab",
+    person("daifengwanglab",
            role = c("aut", "cre"),
            email = "daifengwanglab@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
