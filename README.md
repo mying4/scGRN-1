@@ -69,16 +69,44 @@ Now use the functions in the package.
 df1 <- scGRN_interaction(hic_data,enhancers)
 head(df1)
 ```
-``` r
-setwd('~/Desktop/scGRN/')
-load('df1.Rda')
-head(df1)
+
+    ##      gene gene_chr promoter_start promoter_end enh_chr enh_start   enh_end
+    ## 1   NLRC3    chr16        3624893      3629893   chr16   3907323   3907699
+    ## 2   USP19     chr3       49155872     49160872    chr3  49434888  49435293
+    ## 3    ODF2     chr9      131255635    131260635    chr9 131320645 131321147
+    ## 4  FERMT2    chr14       53415316     53420316   chr14  53772807  53773548
+    ## 5 ZCCHC14    chr16       87454988     87459988   chr16  87573686  87575832
+    ## 6  BNIP3L     chr8       26245406     26250406    chr8  26484874  26485106
+    
+```{r}
+df2 <- scGRN_getTF(df1)
+head(df2,1)
 ```
 
-    ##          gene gene_chr promoter_start promoter_end enh_chr enh_start   enh_end
-    ## 19475   NLRC3    chr16        3624893      3629893   chr16   3907323   3907699
-    ## 5942    USP19     chr3       49155872     49160872    chr3  49434888  49435293
-    ## 54258    ODF2     chr9      131255635    131260635    chr9 131320645 131321147
-    ## 6275   FERMT2    chr14       53415316     53420316   chr14  53772807  53773548
-    ## 26539 ZCCHC14    chr16       87454988     87459988   chr16  87573686  87575832
-    ## 82796  BNIP3L     chr8       26245406     26250406    chr8  26484874  26485106
+    ##    gene              promoter              enhancer
+    ## 1 NLRC3 chr16:3624893-3629893 chr16:3907323-3907699
+    ##                                                                                                                                                                                                                                                                                                                    promoter_TF
+    ## 1 PPARG, RREB1, ESR1, NR1H2, RXRA, REST, CTCF, EWSR1-FLI1, RARA, ESR2, HSF1, MAFF, MEF2C, MAF, NFE2, NR2C2, SP2, TP63, ZNF263, IRF1, MEF2A, PAX5, SRF, TP53, MAFG, POU4F2, SPI1, T, NR3C1, NR3C2, EGR3, EGR4, GLIS2, SCRT1, SCRT2, ONECUT3, MEF2D, NFKB1, PKNOX1, PKNOX2, CREB3L1, BACH2, CTCFL, MAFK, PBX3, SIX2, PPARA, EGR1
+    ##                                                                                                                                                                                                                                                                                                  enhancer_TF
+    ## 1 GATA2, GATA3, FOXI1, SPI1, ETS1, STAT1, INSM1, FOXO3, SOX10, CEBPB, FOXP1, POU2F2, RFX5, STAT2, ZNF263, ZEB1, FOXP2, SREBF2, RFX2, ETV6, FOXL1, HIC2, SNAI2, MEIS1, MEIS2, MEIS3, POU1F1, POU2F1, POU3F1, POU3F2, POU3F3, POU3F4, POU5F1B, FIGLA, ID4, TCF3, TCF4, FOXD2, FOXO4, FOXO6, FOXP3, CTCFL, PBX2
+ 
+Notice that the gene_id in gene expression data is ensembl_id so we need to specify the gexpr_gene_id.
+```{r}
+df3 <- scGRN_getNt(df2, gexpr = gexpr, gexpr_gene_id = 'ensembl_gene_id')
+head(df3)
+```
+    ##                TG              TF              enhancer              promoter
+    ## 1 ENSG00000167984 ENSG00000107485 chr16:3907323-3907699 chr16:3624893-3629893
+    ## 2 ENSG00000167984 ENSG00000168269 chr16:3907323-3907699 chr16:3624893-3629893
+    ## 3 ENSG00000167984 ENSG00000064835 chr16:3907323-3907699 chr16:3624893-3629893
+    ## 4 ENSG00000167984 ENSG00000186564 chr16:3907323-3907699 chr16:3624893-3629893
+    ## 5 ENSG00000167984 ENSG00000091831 chr16:3907323-3907699 chr16:3624893-3629893
+    ## 6 ENSG00000167984 ENSG00000140009 chr16:3907323-3907699 chr16:3624893-3629893
+    ##       TFbs       coef
+    ## 1 enhancer -0.2606894
+    ## 2 enhancer  0.7727942
+    ## 3 enhancer  0.2602421
+    ## 4 enhancer  0.2958101
+    ## 5 promoter  0.2791457
+    ## 6 promoter  0.1293128
+
