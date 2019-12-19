@@ -28,7 +28,7 @@
 #' @export
 #' 
 #' @import TxDb.Hsapiens.UCSC.hg19.knownGene
-#' @importFrom  GenomicFeatures genes transcriptsBy promoters
+#' @import  GenomicFeatures
 #' @import biomaRt
 #' @importFrom  GenomicRanges GRanges
 #' @importFrom  IRanges IRanges findOverlapPairs
