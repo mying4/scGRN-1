@@ -18,7 +18,7 @@ install_github("daifengwanglab/tools/scGRN")
 
 After the installation, you can directly use **library(scGRN)** to load the package.
 
-### Functions and datasets inside in the package
+### Functions in the package
 
 There are three functions inside the package.
 
@@ -46,3 +46,8 @@ There are three functions inside the package.
         * gexpr: gene expression data in which each row represents a gene and each column represents an observation
         
     * output:  a data frame containing TG, TF, promoter, enhancer and coef
+    
+### Example
+
+Here we use hic data [Promoter-anchored chromatin loops](http://resource.psychencode.org/Datasets/Integrative/Promoter-anchored_chromatin_loops.bed) and enhancer list [DER-03a_hg19_PEC_enhancers](http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed) as input and show how to use these functions.
+For convenience, the file names are changed to hic_data.txt and enhancers.txt
