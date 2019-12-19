@@ -1,9 +1,9 @@
-#' scGRN_getNt 
-#' 
+#' scGRN_getNt
+#'
 #' Get gene regulatory network
-#' 
+#'
 #' @usage scGRN_getNt(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
-#'            cutoff_by = 'quantile', cutoff_percentage = 0.9, 
+#'            cutoff_by = 'quantile', cutoff_percentage = 0.9,
 #'            cutoff_absolute = 0.1,scaleby = 'no',
 #'            train_ratio = 0.7, num_cores = 2,
 #'            mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
@@ -23,19 +23,11 @@
 #' @return a data frame containing TG, TF, promoter, enhancer and coef.
 #' @seealso glmnet
 #' @export
-#' 
-#' @import glmnet
-#' @import biomaRt
-#' @importFrom data.table data.table
-#' @importFrom dplyr left_join full_join distinct
-#' @import parallel
-#' @import doParallel
-#' @import foreach
 
 scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
                         cutoff_by = 'quantile', cutoff_percentage = 0.9, cutoff_absolute = 0.1,scaleby = 'no',
                         train_ratio = 0.7, num_cores = 2,
-                         mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
+                         mart = biomaRt::useMart(biomart="ENSEMBL_MART_ENSEMBL",
                                         dataset="hsapiens_gene_ensembl",
                                         host="uswest.ensembl.org")){
 
@@ -62,38 +54,40 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
   }
 
   # Get all the TFs
-  cl <- makeCluster(num_cores) # not overload your computer
-  registerDoParallel(cl)
-  df$TFs <- foreach(i = 1:nrow(df), .combine = rbind,
+  cl <- parallel::makeCluster(num_cores) # not overload your computer
+  doParallel::registerDoParallel(cl)
+  `%dopar%` <- foreach::`%dopar%`
+
+  df$TFs <- foreach::foreach(i = 1:nrow(df), .combine = rbind,
                     .packages = c('data.table')) %dopar% {
             curr_TF <- unique(c(df$enhancer_TF[[i]], df$promoter_TF[[i]]))
             curr_TF <- curr_TF[!is.na(curr_TF)]
             if(length(curr_TF) == 0){
               curr_TF <- NA
             }
-            data.table(TFs = list(curr_TF))
+            data.table::data.table(TFs = list(curr_TF))
   }
-  stopCluster(cl)
+  parallel::stopCluster(cl)
 
   df <- df[, c('gene','enhancer','promoter','enhancer_TF','promoter_TF','TFs')]
   df <- df[!is.na(df$TFs),]
   df$id <- seq.int(nrow(df))
-  df_TF <- df[,c('TFs','id')][,.(TF = unlist(TFs)),by = id]
-  df <- left_join(df,df_TF,by = 'id')
+  df_TF <- df[,c('TFs','id')][,.(TF = unlist(TFs)), by = id]
+  df <- dplyr::left_join(df,df_TF,by = 'id')
 
   df$id <- NULL
   df$TFs <- NULL
-  
-  
-  cl <- makeCluster(num_cores) # not overload your computer
-  registerDoParallel(cl)
-  df$TFbs <- foreach(i = 1:nrow(df), .combine = rbind, 
-                     .packages = c('data.table')) %dopar% {
-                       
+
+
+  cl <- parallel::makeCluster(num_cores) # not overload your computer
+  doParallel::registerDoParallel(cl)
+  df$TFbs <- foreach::foreach(i = 1:nrow(df), .combine = rbind
+                        ) %dopar% {
+
                        if(is.na(df$TF[i])){
                          print("error")
                        }
-                       
+
                        if((df$TF[i] %in% df$enhancer_TF[[i]]) & (df$TF[i] %in% df$promoter_TF[[i]])){
                          binding_site <- 'both'
                        }else if(df$TF[i] %in% df$enhancer_TF[[i]]){
@@ -103,17 +97,17 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
                        }
                        binding_site
                      }
-  stopCluster(cl)
-  
+  parallel::stopCluster(cl)
+
   df <- df[,c('gene','promoter','enhancer','TFbs','TF')]
-  
+
 
   ###### change TF names from hgnc_symbol to emsembl_id
   ###### delete the TF whose ensembl_id is NA
 
   if(gexpr_gene_id == 'hgnc_symbol'){
     if(df_gene_id != 'hgnc_symbol'){
-      gene_names <- getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "ensembl_gene_id",
+      gene_names <- biomaRt::getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "ensembl_gene_id",
                           values = unique(df$gene), mart = mart)
       df$gene <- gene_names$hgnc_symbol[match(df$gene, gene_names$ensembl_gene_id)]
       df <- na.omit(df)
@@ -123,12 +117,12 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
 
   if(gexpr_gene_id == 'ensembl_gene_id'){
     if(df_gene_id == 'ensembl_gene_id'){
-      gene_names <- getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "hgnc_symbol",
+      gene_names <- biomaRt::getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "hgnc_symbol",
                           values = unique(df$TF), mart = mart)
       df$TF <- gene_names$ensembl_gene_id[match(df$TF, gene_names$hgnc_symbol)]
       df <- na.omit(df)
     }else{
-      gene_names <- getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "hgnc_symbol",
+      gene_names <- biomaRt::getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "hgnc_symbol",
                           values = c(unique(df$gene),unique(df$TF)), mart = mart)
       df$gene <- gene_names$ensembl_gene_id[match(df$gene, gene_names$hgnc_symbol)]
       df$TF <- gene_names$ensembl_gene_id[match(df$TF, gene_names$hgnc_symbol)]
@@ -137,10 +131,10 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
   }
 
   tgs <- unique(df$gene)
-  cl <- makeCluster(num_cores)
+  cl <- parallel::makeCluster(num_cores)
   # not overload your computer
-  registerDoParallel(cl)
-  output_df <- foreach(i = 1:length(tgs), .combine = rbind, .packages='glmnet') %dopar% {
+  doParallel::registerDoParallel(cl)
+  output_df <- foreach::foreach(i = 1:length(tgs), .combine = rbind, .packages='glmnet') %dopar% {
 
      selgene <- tgs[i]
 
@@ -166,7 +160,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
            for (j in 0:10) {
              # assign(paste("fit", i, sep=""), cv.glmnet(x.train, y.train,
              # type.measure="mse", alpha=i/10,family="gaussian"))
-             yfit[[j+1]] <- cv.glmnet(x.train, y.train, type.measure="mse",
+             yfit[[j+1]] <- glmnet::cv.glmnet(x.train, y.train, type.measure="mse",
                                       alpha=j/10,family="gaussian")
              yhat[[j+1]] <- as.numeric(predict(yfit[[j+1]], s=yfit[[j+1]]$lambda.1se, newx=x.test))
              mse[j+1] <- mean((y.test - yhat[[j+1]])^2)
@@ -204,7 +198,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
      curr_df
   }
 
-  stopCluster(cl)
+  parallel::stopCluster(cl)
 
    # df and output_df
    # df has gene, enhancer, TF
@@ -215,7 +209,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
     df$id <- paste(df$gene,'-',df$TF,sep = '')
     output_df$id <- paste(output_df$TG,'-',output_df$TF,sep = '')
     output_df$TF <- NULL
-    df <- full_join(df,output_df,by = 'id')
+    df <- dplyr::full_join(df,output_df,by = 'id')
 
     df <- na.omit(df)
     df <- df[,c('TG','TF','enhancer','promoter','TFbs','coef')]
