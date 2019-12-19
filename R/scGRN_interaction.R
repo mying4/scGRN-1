@@ -31,8 +31,8 @@
 #' @import  biomaRt
 #' @import  GenomicRanges
 #' @import  GenomicFeatures
-#' @import GenomeInfoDb
 #' @import  GenomicInteractions
+#' @import GenomeInfoDb
 #' @import  data.table
 #' @import  dplyr 
 
