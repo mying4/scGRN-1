@@ -65,6 +65,7 @@ gexpr = read.table('gexpr.txt',header = T,row.names = 1)
 ```
 
 Now use the functions in the package.
+
 **Step1: find interaction**
 ```{r}
 df1 <- scGRN_interaction(hic_data,enhancers)
@@ -94,6 +95,7 @@ head(df2,1)
     ## 1 GATA2, GATA3, FOXI1, SPI1, ETS1, STAT1, INSM1, FOXO3, SOX10, CEBPB, FOXP1, POU2F2, RFX5, STAT2, ZNF263, ZEB1, FOXP2, SREBF2, RFX2, ETV6, FOXL1, HIC2, SNAI2, MEIS1, MEIS2, MEIS3, POU1F1, POU2F1, POU3F1, POU3F2, POU3F3, POU3F4, POU5F1B, FIGLA, ID4, TCF3, TCF4, FOXD2, FOXO4, FOXO6, FOXP3, CTCFL, PBX2
  
 **Step3: predict TF -> TG via Elastic net**
+
 Notice that the gene_id in gene expression data is ensembl_id so we need to specify the gexpr_gene_id.
 ```{r}
 df3 <- scGRN_getNt(df2, gexpr = gexpr, gexpr_gene_id = 'ensembl_gene_id')
