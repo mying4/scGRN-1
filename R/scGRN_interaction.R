@@ -26,6 +26,17 @@
 #' @return a data frame containing gene, gene_chr, promoter_start, promoter_end, enh_chr,enh_start,enh_end.
 #' @seealso GenomicRanges,TxDb.Hsapiens.UCSC.hg19.knownGene,GenomicInteractions
 #' @export
+#'
+#' @importFrom  biomaRt useMart getBM
+#' @importFrom  GenomicRanges GRanges
+#' @importFrom  GenomicInteractions GenomicInteractions annotateInteractions isInteractionType
+#' @importFrom  GenomicFeatures genes transcriptsBy promoters
+#' @importFrom  IRanges IRanges
+#' @import  S4Vectors
+#' @importFrom GenomeInfoDb seqnames
+#' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
+#' @import   data.table
+#' @importFrom  dplyr  left_join full_join distinct
 
 scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',up_stream = 2500,
                                down_stream = 2500, link_type = 'within' ,target_genes='all',
@@ -146,13 +157,13 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
   df <- data.table::rbindlist(list(df1,df2))
   df$id <- seq.int(nrow(df))
   df_enhancers <- df[,c('enhs','id')]
-  df_enhancers <- df_enhancers[, list(enhancer = unlist(enhs)),by = id]
 
+  df_enhancers <- df_enhancers[, .(enhancer = unlist(enhs)),by = id]
   df <- dplyr::left_join(df,df_enhancers,by = 'id')[,c('promoters','promoter_chr','enhancer','enh_chr')]
   df <- data.table::data.table(df)
   df$id <- seq.int(nrow(df))
   df_promoters <- df[,c('promoters','id')]
-  df_promoters<- df_promoters[, list(promoter = unlist(promoters)),by = id]
+  df_promoters<- df_promoters[, .(promoter = unlist(promoters)),by = id]
   df <- dplyr::left_join(df,df_promoters,by = 'id')[,c('promoter','promoter_chr','enhancer','enh_chr')]
   df <- dplyr::distinct(df)
   sp_list  <- data.table::tstrsplit(df$enhancer,"_|:|-", keep = c(2,3,4))
@@ -161,24 +172,21 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
 
 
   ref_df <- data.frame(promoter = names(annotation_promoters),
-                       promoter_start = annotation_promoters@ranges@start,
-                       promoter_end = annotation_promoters@ranges@start +
-                       annotation_promoters@ranges@width, stringsAsFactors = F)
+                        promoter_start = annotation_promoters@ranges@start,
+                        promoter_end = annotation_promoters@ranges@start +
+                        annotation_promoters@ranges@width, stringsAsFactors = F)
 
 
   final_df <- dplyr::full_join(ref_df,df,by = 'promoter')
   final_df <- na.omit(final_df)
   final_df <- final_df[,c('promoter','promoter_chr',
-                         'promoter_start',
-                         'promoter_end','enh_chr',
+                          'promoter_start',
+                          'promoter_end','enh_chr',
                          'enh_start','enh_end')]
   colnames(final_df) <- c('gene','gene_chr',
-                      'promoter_start',
-                      'promoter_end','enh_chr',
+                       'promoter_start',
+                       'promoter_end','enh_chr',
                       'enh_start','enh_end')
-
-  # final_df <- data.table(final_df)
-  # final_df <- distinct(final_df)
 
   return(final_df)
 }

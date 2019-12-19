@@ -23,6 +23,14 @@
 #' @return a data frame containing TG, TF, promoter, enhancer and coef.
 #' @seealso glmnet
 #' @export
+#'
+#' @import glmnet
+#' @importFrom biomaRt useMart getBM
+#' @import data.table
+#' @importFrom dplyr left_join full_join
+#' @import parallel
+#' @import doParallel
+#' @import foreach
 
 scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
                         cutoff_by = 'quantile', cutoff_percentage = 0.9, cutoff_absolute = 0.1,scaleby = 'no',
@@ -72,7 +80,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
   df <- df[, c('gene','enhancer','promoter','enhancer_TF','promoter_TF','TFs')]
   df <- df[!is.na(df$TFs),]
   df$id <- seq.int(nrow(df))
-  df_TF <- df[,c('TFs','id')][,list(TF = unlist(TFs)), by = id]
+  df_TF <- df[,c('TFs','id')][,.(TF = unlist(TFs)), by = id]
   df <- dplyr::left_join(df,df_TF,by = 'id')
 
   df$id <- NULL
