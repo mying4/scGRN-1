@@ -19,10 +19,6 @@
 #' enhancer_TF is list.
 #' @seealso JASPAR2018, TFBSTools
 #' @export
-#' @examples
-#' 
-#' data(sample_interaction)
-#' TFs <- scGRN_getTF(sample_interaction)
 #' 
 #' @import motifmatchr
 #' @import BSgenome.Hsapiens.UCSC.hg19

@@ -15,11 +15,6 @@
 #' @return a data frame containing TG, TF, promoter, enhancer and coef.
 #' @seealso glmnet
 #' @export
-#' @examples
-#' 
-#' data(sample_TFs)
-#' data(sample_gexpr)
-#' Nt <- scGRN_getNt(sample_TFs,sample_gexpr)
 #' 
 #' @import glmnet
 #' @import biomaRt
