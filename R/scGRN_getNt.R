@@ -1,6 +1,14 @@
 #' scGRN_getNt 
 #' 
 #' Get gene regulatory network
+#' 
+#' @usage scGRN_getNt(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
+#'            cutoff_by = 'quantile', cutoff_percentage = 0.9, 
+#'            cutoff_absolute = 0.1,scaleby = 'no',
+#'            train_ratio = 0.7, num_cores = 2,
+#'            mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
+#'               dataset="hsapiens_gene_ensembl",
+#'               host="uswest.ensembl.org"))
 #' @param df a data.table got from function scGRN_getTF
 #' @param gexpr a data frame or large matrix. Each row represents one gene and each column represents one sample.
 #' @param df_gene_id,gexpr_gene_id the type of gene_id, in df and gexpr, should be 'hgnc_symbol' or 'ensembl_gene_id'.

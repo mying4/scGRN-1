@@ -2,7 +2,8 @@
 #' 
 #' Find transcription factors which bind to promoters and enhancers
 #' 
-#' @usage scGRN_getTF(df)
+#' @usage scGRN_getTF(df, database = JASPAR2018, species_type = 9606, min_score = 0.9,
+#'                    pwm_type = 'prob',num_cores = 2)
 #' 
 #' @param df a data frame which can from the output of function scGRN_interation or available interation data.
 #' The data frame should contain gene, gene_chr, promoter_start, promoter_end,

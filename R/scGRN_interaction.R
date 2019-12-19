@@ -27,13 +27,14 @@
 #' @seealso GenomicRanges,TxDb.Hsapiens.UCSC.hg19.knownGene,GenomicInteractions
 #' @export
 #' 
-#' @import TxDb.Hsapiens.UCSC.hg19.knownGene
-#' @import biomaRt
+#' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
+#' @import  biomaRt
 #' @import  GenomicRanges
 #' @import  GenomicFeatures
-#' @import GenomicInteractions
-#' @import data.table
-#' @import  dplyr
+#' @import GenomeInfoDb
+#' @import  GenomicInteractions
+#' @import  data.table
+#' @import  dplyr 
 
 
 scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',up_stream = 2500,
@@ -178,7 +179,7 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
                          'promoter_start',
                          'promoter_end','enh_chr',
                          'enh_start','enh_end')]
-  colnames(final_df) <- c('gene','gene_chr',
+  names(final_df) <- c('gene','gene_chr',
                       'promoter_start',
                       'promoter_end','enh_chr',
                       'enh_start','enh_end')
