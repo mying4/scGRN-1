@@ -56,7 +56,7 @@ For convenience, the file names are changed to hic_data.txt, enhancers.txt and g
 # format the column names
 # change the column names  as standard
 # change the chromosome format as standard
-hic_data <- read.table('hic_data.txt',skip = 1, header = F, col.names = c('chr','start1','end1','start2','end2')) 
+hic_data <- read.table('hic_data.txt',skip = 1, header = F, stringsAsFactors = F,col.names = c('chr','start1','end1','start2','end2')) 
 hic_data$chr <- paste('chr',hic_data$chr,sep = '')
 enhancers <- read.table('enhancers.txt',header = T,stringsAsFactors = F)[,1:3]
 colnames(enhancers) <- c('chr','start','end')
