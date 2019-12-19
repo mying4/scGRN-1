@@ -27,12 +27,12 @@
 #' @seealso GenomicRanges,TxDb.Hsapiens.UCSC.hg19.knownGene,GenomicInteractions
 #' @export
 #' 
-#' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
 #' @import  biomaRt
 #' @import  GenomicRanges
-#' @import  GenomicFeatures
 #' @import  GenomicInteractions
+#' @import  GenomicFeatures
 #' @import GenomeInfoDb
+#' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
 #' @import  data.table
 #' @import  dplyr 
 
