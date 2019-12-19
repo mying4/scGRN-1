@@ -28,9 +28,9 @@
 #' @export
 #' 
 #' @import TxDb.Hsapiens.UCSC.hg19.knownGene
-#' @import  GenomicFeatures
 #' @import biomaRt
-#' @importFrom  GenomicRanges GRanges
+#' @import  GenomicRanges
+#' @import  GenomicFeatures
 #' @importFrom  IRanges IRanges findOverlapPairs
 #' @importFrom  GenomicInteractions GenomicInteractions  annotateInteractions anchorOne anchorTwo
 #' @importFrom  S4Vectors mcols
