@@ -4,7 +4,8 @@
 \alias{scGRN_getTF}
 \title{scGRN_getTF}
 \usage{
-scGRN_getTF(df)
+scGRN_getTF(df, database = JASPAR2018, species_type = 9606, min_score = 0.9,
+                   pwm_type = 'prob',num_cores = 2)
 }
 \arguments{
 \item{df}{a data frame which can from the output of function scGRN_interation or available interation data.

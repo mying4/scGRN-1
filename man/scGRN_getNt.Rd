@@ -4,20 +4,13 @@
 \alias{scGRN_getNt}
 \title{scGRN_getNt}
 \usage{
-scGRN_getNt(
-  df,
-  gexpr,
-  df_gene_id = "hgnc_symbol",
-  gexpr_gene_id = "hgnc_symbol",
-  cutoff_by = "quantile",
-  cutoff_percentage = 0.9,
-  cutoff_absolute = 0.1,
-  scaleby = "no",
-  train_ratio = 0.7,
-  num_cores = 2,
-  mart = useMart(biomart = "ENSEMBL_MART_ENSEMBL", dataset = "hsapiens_gene_ensembl",
-    host = "uswest.ensembl.org")
-)
+scGRN_getNt(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
+           cutoff_by = 'quantile', cutoff_percentage = 0.9, 
+           cutoff_absolute = 0.1,scaleby = 'no',
+           train_ratio = 0.7, num_cores = 2,
+           mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
+              dataset="hsapiens_gene_ensembl",
+              host="uswest.ensembl.org"))
 }
 \arguments{
 \item{df}{a data.table got from function scGRN_getTF}
