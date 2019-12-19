@@ -33,7 +33,6 @@
 #' @import  GenomicFeatures
 #' @importFrom  IRanges IRanges findOverlapPairs
 #' @importFrom  GenomicInteractions GenomicInteractions  annotateInteractions anchorOne anchorTwo
-#' @importFrom  S4Vectors mcols
 #' @importFrom data.table data.table  rbindlist tstrsplit
 #' @importFrom  dplyr left_join full_join distinct
 
