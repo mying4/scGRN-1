@@ -31,8 +31,7 @@
 #' @import biomaRt
 #' @import  GenomicRanges
 #' @import  GenomicFeatures
-#' @import  IRanges
-#' @importFrom  GenomicInteractions GenomicInteractions  annotateInteractions anchorOne anchorTwo
+#' @import GenomicInteractions
 #' @importFrom data.table data.table  rbindlist tstrsplit
 #' @importFrom  dplyr left_join full_join distinct
 
