@@ -24,11 +24,11 @@ There are three functions inside the package.
 
 1. **scGRN_interaction** :
     * input:
-        * hic_interaction: data frame containing the variables : chr1,start1,end1,chr2,start2,end2
-          or chr,start1,end1,start2,end2
-          
+        * hic_interaction: data frame containing the variables chr1,start1,end1,chr2,start2,end2
+          or chr,start1,end1,start2,end2 
           chr1,ch2 or chr should have the following format 'chrD'(D represents digit 1-22 or X Y)                          
           start1,end1,start2,end2 should be integer type
+          
         * enhancer: a data frame containing chr,start,end for enhancers
         
     * output: a data frame containing gene, gene_chr, promoter_start, promoter_end,               
@@ -44,4 +44,5 @@ There are three functions inside the package.
     * input: 
         * df: output data.table from **scGRN_getTF**
         * gexpr: gene expression data in which each row represents a gene and each column represents an observation
+        
     * output:  a data frame containing TG, TF, promoter, enhancer and coef
