@@ -1,6 +1,6 @@
 # scGRN
 
-A R package designed for users to get their gene regulatory network via Elastic net. 
+A R package designed for users to get gene regulatory network via Elastic net. 
 
 ## Introduction
 Hi-C data is often used to analyze genome-wide chromatin organization like topologically associating domains, linearly contiguous regions of the genome that are associated in 3-D space. Thus we implement this pipeline which makes use of the hic data and user-provided enhancer list to discover latent gene regulatory network. The framework is depicted in the below figure.
