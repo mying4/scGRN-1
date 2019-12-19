@@ -49,5 +49,7 @@ There are three functions inside the package.
     
 ### Example
 
-Here we use hic data [Promoter-anchored chromatin loops](http://resource.psychencode.org/Datasets/Integrative/Promoter-anchored_chromatin_loops.bed) and enhancer list [DER-03a_hg19_PEC_enhancers](http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed) as input and show how to use these functions.
-For convenience, the file names are changed to hic_data.txt and enhancers.txt
+Here we use hic data [Promoter-anchored chromatin loops](http://resource.psychencode.org/Datasets/Integrative/Promoter-anchored_chromatin_loops.bed), enhancer list [DER-03a_hg19_PEC_enhancers](http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed)  and gene expression data [DER-02_PEC_Gene_expression_matrix_TPM](http://resource.psychencode.org/Datasets/Derived/DER-02_PEC_Gene_expression_matrix_TPM.txt).
+For convenience, the file names are changed to hic_data.txt, enhancers.txt and gexpr.txt respectively.
+
+
