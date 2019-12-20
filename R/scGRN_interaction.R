@@ -36,7 +36,7 @@
 #' @importFrom GenomeInfoDb seqnames
 #' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
 #' @import   data.table
-#' @import  dplyr
+#' @importFrom  dplyr left_join full_join distinct
 
 scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',up_stream = 2500,
                                down_stream = 2500, link_type = 'within' ,target_genes='all',

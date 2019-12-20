@@ -27,7 +27,7 @@
 #' @importFrom  GenomicRanges GRanges trim
 #' @importFrom  GenomeInfoDb seqlengths
 #' @import  data.table
-#' @import  dplyr
+#' @importFrom  dplyr distinct
 #' @importFrom  IRanges IRanges
 #' @importFrom TFBSTools getMatrixSet toPWM name
 #' @import parallel
