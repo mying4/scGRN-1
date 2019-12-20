@@ -74,16 +74,16 @@ scGRN_getTF <- function(df, database = JASPAR2018::JASPAR2018, species_type = 96
   df_p$promoter_TF <- foreach::foreach(i = 1:nrow(df_p), .combine = rbind,
                                        .packages = c('data.table','motifmatchr')) %dopar% {
                                 peak <- G1[i]
-                                motif_ix <- motifmatchr::matchMotifs(pwmlist, peak,
+                                motif_ix <- matchMotifs(pwmlist, peak,
                                                         genome = "hg19",
                                                         out = "scores"
                                                         )
-                                result <- motifmatchr::motifScores(motif_ix)[1,]
+                                result <- motifScores(motif_ix)[1,]
                                 curr_TF <- unique(unlist(TF_names_splited[result > quantile(result,min_score)]))
                                 if(length(curr_TF) == 0){
                                   curr_TF <- NA
                                 }
-                                data.table::data.table(promoter_TF = list(curr_TF))
+                                data.table(promoter_TF = list(curr_TF))
 
                               }
   parallel::stopCluster(cl)
@@ -93,15 +93,15 @@ scGRN_getTF <- function(df, database = JASPAR2018::JASPAR2018, species_type = 96
   df_e$enhancer_TF <- foreach::foreach(i = 1:nrow(df_e), .combine = rbind,
                               .packages = c('data.table','motifmatchr')) %dopar% {
                                 peak <- G2[i]
-                                motif_ix <- motifmatchr::matchMotifs(pwmlist, peak,
+                                motif_ix <- matchMotifs(pwmlist, peak,
                                                         genome = "hg19",
                                                         out = "scores")
-                                result <- motifmatchr::motifScores(motif_ix)[1,]
+                                result <- motifScores(motif_ix)[1,]
                                 curr_TF <- unique(unlist(TF_names_splited[result > quantile(result,min_score)]))
                                 if(length(curr_TF) == 0){
                                   curr_TF <- NA
                                 }
-                                data.table::data.table(promoter_TF = list(curr_TF))
+                                data.table(promoter_TF = list(curr_TF))
                               }
   parallel::stopCluster(cl)
 
