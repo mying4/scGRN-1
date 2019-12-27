@@ -70,7 +70,7 @@ Now use the functions in the package.
 ```{r}
 df1 <- scGRN_interaction(hic_data,enhancers)
 # Here I only use subset of df1 to demonstrate the steps.
-df1 <- df1[sample(nrow(df1),100),]
+df1 <- df1[sample(nrow(df1),10),]
 head(df1)
 ```
 
@@ -100,21 +100,22 @@ head(df2,1)
 
 Notice that the gene_id in gene expression data is ensembl_id so we need to specify the gexpr_gene_id.
 ```{r}
-df3 <- scGRN_getNt(df2, gexpr = gexpr, gexpr_gene_id = 'ensembl_gene_id')
+df3 <- scGRN_getNt(df = df2, gexpr = gexpr,gexpr_gene_id = 'ensembl_gene_id')
+
+# Now change the ensembl_gene_id to hgnc_symbol
+mart = biomaRt::useMart(biomart="ENSEMBL_MART_ENSEMBL",
+                                        dataset="hsapiens_gene_ensembl",
+                                        host="uswest.ensembl.org")
+gene_names <- biomaRt::getBM(attributes = c("hgnc_symbol","ensembl_gene_id"), filters = "ensembl_gene_id",values = unique(c(df3$TF,df3$TG)), mart = mart)
+df3$TG <- gene_names$hgnc_symbol[match(df3$TG, gene_names$ensembl_gene_id)]
+df3$TF <- gene_names$hgnc_symbol[match(df3$TF, gene_names$ensembl_gene_id)]
+
 head(df3)
 ```
-    ##                TG              TF              enhancer              promoter
-    ## 1 ENSG00000167984 ENSG00000107485 chr16:3907323-3907699 chr16:3624893-3629893
-    ## 2 ENSG00000167984 ENSG00000168269 chr16:3907323-3907699 chr16:3624893-3629893
-    ## 3 ENSG00000167984 ENSG00000064835 chr16:3907323-3907699 chr16:3624893-3629893
-    ## 4 ENSG00000167984 ENSG00000186564 chr16:3907323-3907699 chr16:3624893-3629893
-    ## 5 ENSG00000167984 ENSG00000091831 chr16:3907323-3907699 chr16:3624893-3629893
-    ## 6 ENSG00000167984 ENSG00000140009 chr16:3907323-3907699 chr16:3624893-3629893
-    ##       TFbs       coef
-    ## 1 enhancer -0.2606894
-    ## 2 enhancer  0.7727942
-    ## 3 enhancer  0.2602421
-    ## 4 enhancer  0.2958101
-    ## 5 promoter  0.2791457
-    ## 6 promoter  0.1293128
+    ##           TG      TF               enhancer               promoter     TFbs      coef
+    ## 1  RNF220   FOXI1 chr1:44988522-44988778 chr1:44868550-44873550 enhancer 159.21054
+    ## 17 RNF220 BHLHE23 chr1:44988522-44988778 chr1:44868550-44873550 enhancer -11.72905
+    ## 20 RNF220   OLIG3 chr1:44988522-44988778 chr1:44868550-44873550 enhancer 148.79653
+    ## 26 RNF220    TLX1 chr1:44988522-44988778 chr1:44868550-44873550 promoter  27.85926
+    ## 43 RNF220  POU4F2 chr1:44988522-44988778 chr1:44868550-44873550 promoter  24.35724
 
