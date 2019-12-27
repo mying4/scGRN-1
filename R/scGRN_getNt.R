@@ -193,7 +193,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
 
            if(length(TF_coef) > 0){
              curr_df <- data.frame(TG = rep(selgene,length(TF_coef)), TF = names(TF_coef),
-                                   coef = unname(TF_coef))
+                                   coef = unname(TF_coef), stringsAsFactors = F)
            }else{
              curr_df <- data.frame(TG = NULL, TF = NULL,
                                    coef = NULL)
