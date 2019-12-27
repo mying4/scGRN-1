@@ -30,6 +30,11 @@ enhancer_TF is list.
 \description{
 Find transcription factors which bind to promoters and enhancers
 }
+\examples{
+data(interaction_data)
+df <- scGRN_getTF(interaction_data)
+
+}
 \seealso{
 JASPAR2018, TFBSTools
 }

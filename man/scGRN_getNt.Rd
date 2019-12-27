@@ -40,6 +40,11 @@ a data frame containing TG, TF, promoter, enhancer and coef.
 \description{
 Get gene regulatory network
 }
+\examples{
+data(gexpr)
+data(TFs)
+df <- scGRN_getNt(df = TFs, gexpr = gexpr,gexpr_gene_id = 'ensembl_gene_id')
+}
 \seealso{
 glmnet
 }

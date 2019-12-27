@@ -42,6 +42,12 @@ Find enhancers and promoters for target genes.
 \details{
 it would be a good option to set a relavant large upstream and downstream and link the ref_promoters to genes by within the whole promoters we annotated.
 }
+\examples{
+data(enhancers)
+data(hic_data)
+df <- scGRN_interaction(hic_data,enhancers)
+
+}
 \seealso{
 GenomicRanges,TxDb.Hsapiens.UCSC.hg19.knownGene,GenomicInteractions
 }
