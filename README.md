@@ -69,22 +69,26 @@ Now use the functions in the package.
 **Step1: find interaction**
 ```{r}
 df1 <- scGRN_interaction(hic_data,enhancers)
+# Here I only use subset of df1 to demonstrate the steps.
+df1 <- df1[sample(nrow(df1),100),]
 head(df1)
 ```
+         gene gene_chr promoter_start promoter_end enh_chr enh_start   enh_end
+18741   DUSP8    chr11        1590651      1595651   chr11   1579427   1581277
+44189    POLN     chr4        2241361      2246361    chr4   2071734   2072014
+88221 LDLRAD4    chr18       13639257     13644257   chr18  13560988  13561222
+91073   GSDMD     chr8      144637583    144642583    chr8 144987814 144988401
+5995    RAB10     chr2       26254229     26259229    chr2  25452258  25452926
+73546 PITPNM2    chr12      123587547    123592547   chr12 123569147 123569555
 
-    ##      gene gene_chr promoter_start promoter_end enh_chr enh_start   enh_end
-    ## 1   NLRC3    chr16        3624893      3629893   chr16   3907323   3907699
-    ## 2   USP19     chr3       49155872     49160872    chr3  49434888  49435293
-    ## 3    ODF2     chr9      131255635    131260635    chr9 131320645 131321147
-    ## 4  FERMT2    chr14       53415316     53420316   chr14  53772807  53773548
-    ## 5 ZCCHC14    chr16       87454988     87459988   chr16  87573686  87575832
-    ## 6  BNIP3L     chr8       26245406     26250406    chr8  26484874  26485106
     
 
 **Step2: get TFs for each promoter and enhance**
 ```{r}
+df1 <- df1[sample(nrow(df1),100),]
 df2 <- scGRN_getTF(df1)
-head(df2,1)
+head(df2)
+
 ```
 
     ##    gene              promoter              enhancer
