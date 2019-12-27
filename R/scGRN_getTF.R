@@ -33,6 +33,11 @@
 #' @import parallel
 #' @import doParallel
 #' @import foreach
+#'
+#' @examples
+#' data(interaction_data)
+#' df <- scGRN_getTF(interaction_data)
+#'
 
 
 scGRN_getTF <- function(df, database = JASPAR2018::JASPAR2018, species_type = 9606, min_score = 0.9,

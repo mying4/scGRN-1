@@ -37,6 +37,12 @@
 #' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
 #' @import   data.table
 #' @importFrom  dplyr left_join full_join distinct
+#'
+#' @examples
+#' data(enhancers)
+#' data(hic_data)
+#' df <- scGRN_interaction(hic_data,enhancers)
+#'
 
 scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',up_stream = 2500,
                                down_stream = 2500, link_type = 'within' ,target_genes='all',
@@ -53,7 +59,7 @@ scGRN_interaction = function(hic_interaction, enhancers, ref_promoters = 'all',u
   # get hi-tad data
   # I assume there are strictly 5 columns or 6 columns
   if(ncol(hic_interaction)==6){
-    anchor.one <- GenomicRanges:::GRanges(hic_interaction$chr1,
+    anchor.one <- GenomicRanges::GRanges(hic_interaction$chr1,
                                    IRanges::IRanges(start = hic_interaction$start1, end = hic_interaction$end1))
     anchor.two <- GenomicRanges::GRanges(hic_interaction$chr2,
                                    IRanges::IRanges(start = hic_interaction$start2, end = hic_interaction$end2))
