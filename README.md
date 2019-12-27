@@ -73,13 +73,14 @@ df1 <- scGRN_interaction(hic_data,enhancers)
 df1 <- df1[sample(nrow(df1),100),]
 head(df1)
 ```
-         gene gene_chr promoter_start promoter_end enh_chr enh_start   enh_end
-18741   DUSP8    chr11        1590651      1595651   chr11   1579427   1581277
-44189    POLN     chr4        2241361      2246361    chr4   2071734   2072014
-88221 LDLRAD4    chr18       13639257     13644257   chr18  13560988  13561222
-91073   GSDMD     chr8      144637583    144642583    chr8 144987814 144988401
-5995    RAB10     chr2       26254229     26259229    chr2  25452258  25452926
-73546 PITPNM2    chr12      123587547    123592547   chr12 123569147 123569555
+
+##         gene gene_chr promoter_start promoter_end enh_chr enh_start   enh_end
+##18741   DUSP8    chr11        1590651      1595651   chr11   1579427   1581277
+##44189    POLN     chr4        2241361      2246361    chr4   2071734   2072014
+##88221 LDLRAD4    chr18       13639257     13644257   chr18  13560988  13561222
+##91073   GSDMD     chr8      144637583    144642583    chr8 144987814 144988401
+##5995    RAB10     chr2       26254229     26259229    chr2  25452258  25452926
+##73546 PITPNM2    chr12      123587547    123592547   chr12 123569147 123569555
 
     
 
