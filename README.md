@@ -112,7 +112,7 @@ df3$TF <- gene_names$hgnc_symbol[match(df3$TF, gene_names$ensembl_gene_id)]
 
 head(df3)
 ```
-    ##           TG      TF               enhancer               promoter     TFbs      coef
+    ##        TG      TF               enhancer               promoter     TFbs      coef
     ## 1  RNF220   FOXI1 chr1:44988522-44988778 chr1:44868550-44873550 enhancer 159.21054
     ## 17 RNF220 BHLHE23 chr1:44988522-44988778 chr1:44868550-44873550 enhancer -11.72905
     ## 20 RNF220   OLIG3 chr1:44988522-44988778 chr1:44868550-44873550 enhancer 148.79653
