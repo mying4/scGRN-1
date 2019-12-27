@@ -13,7 +13,7 @@ The devtools package provides install_github() that enables people to install pa
 ```R
 install.packages("devtools")
 library(devtools)
-install_github("daifengwanglab/tools/scGRN")
+install_github("daifengwanglab/scGRN")
 ```
 
 After the installation, you can directly use **library(scGRN)** to load the package.
