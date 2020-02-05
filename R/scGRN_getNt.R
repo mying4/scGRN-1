@@ -38,7 +38,7 @@
 #' df <- scGRN_getNt(df = TFs, gexpr = gexpr,gexpr_gene_id = 'ensembl_gene_id')
 
 scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
-                        cutoff_by = 'quantile', cutoff_percentage = 0.9, cutoff_absolute = 0.1,scaleby = 'no',
+                        cutoff_by = 'quantile', cutoff_percentage = 0.1, cutoff_absolute = 0.1,scaleby = 'no',
                         train_ratio = 0.7, num_cores = 2,
                          mart = biomaRt::useMart(biomart="ENSEMBL_MART_ENSEMBL",
                                         dataset="hsapiens_gene_ensembl",
