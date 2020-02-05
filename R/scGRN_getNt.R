@@ -154,7 +154,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
      if(selgene %in% rownames(gexpr)){
        selTFs <- unique(df[df$gene == selgene, 'TF'])
        train_cols <- sample(1:ncol(gexpr), round(train_ratio*ncol(gexpr)))
-       if(sum(rownames(gexpr) %in% selTFs) != 0 ){
+       if(sum(rownames(gexpr) %in% selTFs) > 1 ){
 
          x.train <- t(gexpr[rownames(gexpr) %in% selTFs,train_cols])
          x.test <- t(gexpr[rownames(gexpr) %in% selTFs,-train_cols])
@@ -184,7 +184,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
            TF_coef <- as.matrix(fitcoef)
            TF_coef <- TF_coef[2:nrow(TF_coef),]
            if(cutoff_by == 'quantile'){
-             TF_coef <- TF_coef[abs(TF_coef) > quantile(abs(TF_coef),cutoff_percentage)]
+             TF_coef <- TF_coef[abs(TF_coef) > quantile(abs(TF_coef),1-cutoff_percentage)]
            }else if(cutoff_by == 'absolute'){
              TF_coef <- TF_coef[abs(TF_coef) > cutoff_absolute]
            }else{
