@@ -38,7 +38,7 @@
 #' df <- scGRN_getNt(df = TFs, gexpr = gexpr,gexpr_gene_id = 'ensembl_gene_id')
 
 scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
-                        cutoff_by = 'quantile', cutoff_percentage = 0.1, cutoff_absolute = 0.1,scaleby = 'no',
+                        cutoff_by = 'quantile', cutoff_percentage = 0.9, cutoff_absolute = 0.1,scaleby = 'no',
                         train_ratio = 0.7, num_cores = 2,
                          mart = biomaRt::useMart(biomart="ENSEMBL_MART_ENSEMBL",
                                         dataset="hsapiens_gene_ensembl",
@@ -113,6 +113,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
   parallel::stopCluster(cl)
 
   df <- df[,c('gene','promoter','enhancer','TFbs','TF')]
+  df <- df[df$TF != df$gene, ]
 
 
   ###### change TF names from hgnc_symbol to emsembl_id
@@ -174,7 +175,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
              # assign(paste("fit", i, sep=""), cv.glmnet(x.train, y.train,
              # type.measure="mse", alpha=i/10,family="gaussian"))
              yfit[[j+1]] <- glmnet::cv.glmnet(x.train, y.train, type.measure="mse",
-                                      alpha=j/10,family="gaussian")
+                                      alpha=j/10,family="gaussian",standardize= F,intercept=T)
              yhat[[j+1]] <- as.numeric(predict(yfit[[j+1]], s=yfit[[j+1]]$lambda.1se, newx=x.test))
              mse[j+1] <- mean((y.test - yhat[[j+1]])^2)
            }
@@ -184,7 +185,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
            TF_coef <- as.matrix(fitcoef)
            TF_coef <- TF_coef[2:nrow(TF_coef),]
            if(cutoff_by == 'quantile'){
-             TF_coef <- TF_coef[abs(TF_coef) > quantile(abs(TF_coef),1-cutoff_percentage)]
+             TF_coef <- TF_coef[abs(TF_coef) > quantile(abs(TF_coef),1 - cutoff_percentage)]
            }else if(cutoff_by == 'absolute'){
              TF_coef <- TF_coef[abs(TF_coef) > cutoff_absolute]
            }else{
@@ -193,7 +194,7 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
 
            if(length(TF_coef) > 0){
              curr_df <- data.frame(TG = rep(selgene,length(TF_coef)), TF = names(TF_coef),
-                                   coef = unname(TF_coef), stringsAsFactors = F)
+                                   coef = unname(TF_coef),stringsAsFactors = F)
            }else{
              curr_df <- data.frame(TG = NULL, TF = NULL,
                                    coef = NULL)
