@@ -1,6 +1,6 @@
 # scGRN
 
-A R package designed for users to get gene regulatory network via Elastic net. 
+A R package for predicting cell-type gene regulatory networks via multi-omics data integration and analyses. 
 
 ## Introduction
 Understanding the gene regulatory mechanisms at the cellular resolution remains challenging. To address this, we have developed a computational pipeline to integrate single cell multi-omic data including chromatin interactions, epigenomics and transcriptomics, for predicting cell-type gene regulatory networks linking transcription factors, distal regulatory elements and target genes in the human brain (e.g., excitatory and inhibitory neurons, microglia, oligodendrocyte). The pipeline is depicted in the below flow chart.
