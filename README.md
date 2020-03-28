@@ -3,7 +3,7 @@
 A R package designed for users to get gene regulatory network via Elastic net. 
 
 ## Introduction
-Hi-C data is often used to analyze genome-wide chromatin organization like topologically associating domains, linearly contiguous regions of the genome that are associated in 3-D space. Thus we implement this pipeline which makes use of the hic data and user-provided enhancer list to discover latent gene regulatory network. The framework is depicted in the below figure.
+Understanding the gene regulatory mechanisms at the cellular resolution remains challenging. To address this, we have developed a computational pipeline to integrate single cell multi-omic data including chromatin interactions, epigenomics and transcriptomics, for predicting cell-type gene regulatory networks linking transcription factors, distal regulatory elements and target genes in the human brain (e.g., excitatory and inhibitory neurons, microglia, oligodendrocyte). The pipeline is depicted in the below flow chart.
 
 ![Pipeline](https://github.com/daifengwanglab/scGRN/blob/master/pipeline.png)
 
