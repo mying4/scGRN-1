@@ -9,11 +9,22 @@ Understanding the gene regulatory mechanisms at the cellular resolution remains 
 
 
 ## Prerequisite
-Our package needs the following packages to work.
-> GenomicInteractions,biomaRt,GenomicRanges,GenomicFeatures,GenomeInfoDb,IRanges,S4Vectors,BSgenome.Hsapiens.UCSC.hg19,TxDb.Hsapiens.UCSC.hg19.knownGene,TFBSTools,JASPAR2018,glmnet,motifmatchr,
+Our package needs to import the following R packages to work.
+
+> GenomicInteractions,biomaRt,GenomicRanges,GenomicFeatures,GenomeInfoDb,IRanges,S4Vectors,
+BSgenome.Hsapiens.UCSC.hg19,TxDb.Hsapiens.UCSC.hg19.knownGene,TFBSTools,JASPAR2018,glmnet,motifmatchr,
 data.table,dplyr,parallel,doParallel,foreach
 
-All these
+All of these package can be installed either in Bioconductor or CRAN.
+
+```R
+# For example, I want to download R package - GenomicInteractions
+# The following code would help
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("GenomicInteractions")
+```
 
 ## Install scGRN R package
 The devtools package provides install_github() that enables people to install packages from GitHub. You can use the following code to download the scGRN package.
