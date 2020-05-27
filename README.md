@@ -11,11 +11,12 @@ Understanding the gene regulatory mechanisms at the cellular resolution remains 
 ## Prerequisite
 Our package needs to import the following R packages to work.
 
-> GenomicInteractions,biomaRt,GenomicRanges,GenomicFeatures,GenomeInfoDb,IRanges,S4Vectors,
-BSgenome.Hsapiens.UCSC.hg19,TxDb.Hsapiens.UCSC.hg19.knownGene,TFBSTools,JASPAR2018,glmnet,motifmatchr,
-data.table,dplyr,parallel,doParallel,foreach
+> GenomicInteractions, biomaRt, GenomicRanges, GenomicFeatures, GenomeInfoDb, IRanges, S4Vectors,
+TFBSTools, glmnet, motifmatchr, data.table, dplyr, parallel, doParallel, foreach
 
-All of these package can be installed either in Bioconductor or CRAN.
+Besides, data from packages *BSgenome.Hsapiens.UCSC.hg19*, *TxDb.Hsapiens.UCSC.hg19.knownGene* and *JASPAR2018* are also used to finish our pipeline.
+
+All of these packages can be installed either in Bioconductor or CRAN.
 
 ```R
 # For example, I want to download R package - GenomicInteractions
@@ -70,7 +71,7 @@ There are three functions inside the package.
 
 To present how our pipeline works, we will use microglia interactome data [1], microglia enhancers [1], gene expression data [2] to illustrate the steps.
 
-To begin with, we prepare and format the data in R .
+To begin with, we prepare and format the data in R.
 
 ```{r}
 library(readxl)
