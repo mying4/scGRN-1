@@ -21,7 +21,7 @@ After the installation, you can directly use **library(scGRN)** to load the pack
 
 There are three functions inside the package.
 
-1. **scGRN_interaction** :
+**scGRN_interaction** :
     * input:
         * hic_interaction: data frame containing the variables chr1,start1,end1,chr2,start2,end2
           or chr,start1,end1,start2,end2 
@@ -33,13 +33,13 @@ There are three functions inside the package.
     * output: a data frame containing gene, gene_chr, promoter_start, promoter_end,               
       enh_chr,enh_start,enh_end
  
-2. **scGRN_getTF** :
+**scGRN_getTF** :
     * input: 
         * df: output data frame from **scGRN_interaction**
     
     * output: a data.table which contains transcription factors for each region
 
-3. **scGRN_getNt** :
+**scGRN_getNt** :
     * input: 
         * df: output data.table from **scGRN_getTF**
         * gexpr: gene expression data in which each row represents a gene and each column represents an observation
