@@ -7,8 +7,17 @@ Understanding the gene regulatory mechanisms at the cellular resolution remains 
 
 ![Pipeline](https://github.com/daifengwanglab/scGRN/blob/master/pipeline.png)
 
+
+## Prerequisite
+Our package needs the following packages to work.
+> GenomicInteractions,biomaRt,GenomicRanges,GenomicFeatures,GenomeInfoDb,IRanges,S4Vectors,BSgenome.Hsapiens.UCSC.hg19,TxDb.Hsapiens.UCSC.hg19.knownGene,TFBSTools,JASPAR2018,glmnet,motifmatchr,
+data.table,dplyr,parallel,doParallel,foreach
+
+All these
+
 ## Install scGRN R package
 The devtools package provides install_github() that enables people to install packages from GitHub. You can use the following code to download the scGRN package.
+
 ```R
 install.packages("devtools")
 library(devtools)
@@ -121,7 +130,7 @@ head(df3)
 
 
 ## Reference and source
-1. Nott A, Holtman IR, Coufal NG, Schlachetzki JCM, Yu M, Hu R, et al. Brain cell type-specific enhancer-promoter interactome maps and disease-risk association. Science. 
+1. Nott A, Holtman IR, Coufal NG, Schlachetzki JCM, Yu M, Hu R, et al. Brain cell type-specific enhancer-promoter interactome maps and disease-risk association. Science. 2019;366:1134–9. 
 
 2. Wang D, Liu S, Warrell J, Won H, Shi X, Navarro FCP, et al. Comprehensive functional genomic resource and integrative model for the human brain. Science. 2018;362. 
 
