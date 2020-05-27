@@ -48,7 +48,7 @@ There are three functions inside the package.
     
 ## Example
 
-To present how our pipeline works, we will use microglia interactome data, microglia enhancers [1] and gene expression data [2] to illustrate the steps.
+To present how our pipeline works, we will use microglia interactome data [1], microglia enhancers [1], gene expression data [2] to illustrate the steps.
 
 To begin with, we prepare and format the data in R .
 
@@ -120,7 +120,7 @@ head(df3)
     ## 7 PICK1   SP1 chr22:38731974-38732426 chr22:38451253-38456253 enhancer  -0.002453652
 
 
-## Reference
+## Reference and source
 1. Nott A, Holtman IR, Coufal NG, Schlachetzki JCM, Yu M, Hu R, et al. Brain cell type-specific enhancer-promoter interactome maps and disease-risk association. Science. 
 
 2. Wang D, Liu S, Warrell J, Won H, Shi X, Navarro FCP, et al. Comprehensive functional genomic resource and integrative model for the human brain. Science. 2018;362. 
