@@ -6,7 +6,7 @@
 \usage{
 scGRN_getNt(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
            cutoff_by = 'quantile', cutoff_percentage = 0.9,
-           cutoff_absolute = 0.1,scaleby = 'no',
+           cutoff_absolute = 0.1,
            train_ratio = 0.7, num_cores = 2,
            mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
               dataset="hsapiens_gene_ensembl",
@@ -25,8 +25,6 @@ will be used to pick the coefficients whose absolute value are larger that the q
 \item{cutoff_percentage}{a user defined numeric value to stop the cutoff specified as a proportion 0 to 1}
 
 \item{cutoff_absolute}{a user defined numeric value to stop the cutoff, defaults to 0.1}
-
-\item{scaleby}{user specified object to which scale method applied, should be 'gene', 'sample' or 'no'.}
 
 \item{train_ratio}{train size, should be between 0.0 and 1.0 and represent the proportion of the dataset to be included in the training set.}
 
