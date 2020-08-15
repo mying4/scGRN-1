@@ -4,7 +4,7 @@
 #'
 #' @usage scGRN_getNt(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
 #'            cutoff_by = 'quantile', cutoff_percentage = 0.9,
-#'            cutoff_absolute = 0.1,
+#'            cutoff_absolute = 0.1,scaleby = 'no',
 #'            train_ratio = 0.7, num_cores = 2,
 #'            mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
 #'               dataset="hsapiens_gene_ensembl",
@@ -16,6 +16,7 @@
 #' will be used to pick the coefficients whose absolute value are larger that the quantile. Otherwise, cutoff_absolute will be used.
 #' @param cutoff_percentage a user defined numeric value to stop the cutoff specified as a proportion 0 to 1
 #' @param cutoff_absolute a user defined numeric value to stop the cutoff, defaults to 0.1
+#' @param scaleby  user specified object to which scale method applied, should be 'gene', 'sample' or 'no'.
 #' @param train_ratio train size, should be between 0.0 and 1.0 and represent the proportion of the dataset to be included in the training set.
 #' @param num_cores number of cores used to do parallel computing
 #' @param mart  a dataset in BioMart database
@@ -37,7 +38,7 @@
 #' df <- scGRN_getNt(df = TFs, gexpr = gexpr,gexpr_gene_id = 'ensembl_gene_id')
 
 scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = 'hgnc_symbol',
-                        cutoff_by = 'quantile', cutoff_percentage = 0.9, cutoff_absolute = 0.1,
+                        cutoff_by = 'quantile', cutoff_percentage = 0.9, cutoff_absolute = 0.1,scaleby = 'no',
                         train_ratio = 0.7, num_cores = 2,
                          mart = biomaRt::useMart(biomart="ENSEMBL_MART_ENSEMBL",
                                         dataset="hsapiens_gene_ensembl",
@@ -49,11 +50,21 @@ scGRN_getNt <- function(df, gexpr, df_gene_id = 'hgnc_symbol', gexpr_gene_id = '
   #                                   is a observation
 
   # data preprocessing and unlist the nested TFs
+  # scaleby can be one of c('gene', 'sample', 'no')
   # one can use mart = useMart(biomart="ENSEMBL_MART_ENSEMBL",
   # dataset="hsapiens_gene_ensembl",
   # host="uswest.ensembl.org")
   # cutoff_by can be either absolute or quantile
 
+  if(scaleby == 'sample'){
+    gexpr <- scale(gexpr)
+  }else if(scaleby == 'gene'){
+    gexpr <- t(gexpr)
+    gexpr <- scale(gexpr)
+    gexpr <- t(gexpr)
+  }else{
+    gexpr <- gexpr
+  }
 
   # Get all the TFs
   cl <- parallel::makeCluster(num_cores) # not overload your computer
