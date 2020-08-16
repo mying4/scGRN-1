@@ -137,6 +137,8 @@ head(df2,1)
 
 Last, what we need to do is to input the gene expression data and the output of function *scGRN_getTF*.
 
+For the third function, if you get a data frame with 0 rows, you may try creating a new R script and copy the function and rename it, say f. f should work well.
+
 ```{r}
 df3 <- scGRN_getNt(df = df2, gexpr = gexpr)
 head(df3)
