@@ -22,7 +22,6 @@
 #' @return a data frame containing TG, TF, promoter, enhancer and coef.
 #' @seealso glmnet
 #' 
-#' @import glmnet
 #' @importFrom biomaRt useMart getBM
 #' @importFrom dplyr left_join full_join
 #' @import parallel
