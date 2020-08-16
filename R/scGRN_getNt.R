@@ -24,7 +24,6 @@
 #' 
 #' @import glmnet
 #' @importFrom biomaRt useMart getBM
-#' @import data.table
 #' @importFrom dplyr left_join full_join
 #' @import parallel
 #' @import doParallel

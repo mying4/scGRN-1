@@ -26,7 +26,6 @@
 #' @import JASPAR2018
 #' @importFrom  GenomicRanges GRanges trim
 #' @importFrom  GenomeInfoDb seqlengths
-#' @import  data.table
 #' @importFrom  dplyr distinct
 #' @importFrom  IRanges IRanges
 #' @importFrom TFBSTools getMatrixSet toPWM name

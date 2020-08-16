@@ -35,7 +35,6 @@
 #' @importFrom  S4Vectors `%in%` mcols
 #' @importFrom GenomeInfoDb seqnames
 #' @import  TxDb.Hsapiens.UCSC.hg19.knownGene
-#' @import   data.table
 #' @importFrom  dplyr left_join full_join distinct
 #'
 #' @examples
